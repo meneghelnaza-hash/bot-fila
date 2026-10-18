@@ -1,10 +1,4 @@
 const express = require('express');
 const app = express();
-
-app.get('/', (req, res) => {
-  res.send('NATALINO TA ONLINE 24/7 - NATAL APOSTAS');
-});
-
-app.listen(10000, () => {
-  console.log('Servidor Keep Alive LIGADO - NATALINO nunca vai dormir');
-});
+app.get('/', (req, res) => res.send('NATALINO ON!'));
+app.listen(process.env.PORT || 3000, () => console.log('Keep alive ON'));
