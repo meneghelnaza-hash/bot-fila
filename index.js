@@ -1,4 +1,8 @@
-require('./keep_alive.js');// ANTI-QUEDA NATALINO - FICA PRA SEMPRE
+require('./keep_alive.js');
+
+const { Client, GatewayIntentBits } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+
 client.on('shardDisconnect', () => {
   console.log('NATALINO desconectou, reconectando...');
   client.login(process.env.TOKEN);
@@ -9,9 +13,16 @@ client.on('shardError', error => {
 });
 
 client.on('ready', () => {
-  console.log(`NATALINO TA ON PRA SEMPRE COMO ${client.user.tag}`);
+  console.log('NATALINO TA ON PRA SEMPRE COM ANTI-QUEDA');
 });
 
-// Impede o bot de fechar sozinho
-process.on('unhandledRejection', err => console.log('Erro ignorado:', err));
-process.on('uncaughtException', err => console.log('Erro ignorado:', err));
+client.on('messageCreate', msg => {
+  if (msg.content === '!fila') {
+    msg.reply('Fila aqui!');
+  }
+});
+
+client.login(process.env.TOKEN);
+
+process.on('unhandledRejection', err => console.log(err));
+process.on('uncaughtException', err => console.log(err));
